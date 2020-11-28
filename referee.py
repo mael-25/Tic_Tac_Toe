@@ -5,7 +5,4 @@ class Referee:
         self.occupied = [
             [0, 0, 0],
             [0, 0, 0],
-            [0, 0, 0]
-        ]
-        self.b = 0
-        self.c = 0
+            [0, 0, 0]]

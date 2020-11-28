@@ -1,4 +1,6 @@
 import pygame
+import random
+
 
 
 class Piece:
@@ -12,13 +14,16 @@ class Piece:
 
     def draw(self, player, posx, posy):
         if player == 1:
+            r1 = random.randint(0, 255)
+            r2 = random.randint(0, 255)
+            r3 = random.randint(0, 255)
             pygame.draw.line(self.screen, 
-            (123, 231, 213), 
+            (r1, r2, r3), 
             (posx * self.step + self.start_x, posy * self.step + self.start_x), 
             ((posx + 1) * self.step + self.start_x, (posy + 1) * self.step + self.start_y))
 
             pygame.draw.line(self.screen, 
-            (123, 231, 213), 
+            (r2, r3, r1), 
             ((posx + 1) * self.step + self.start_x, posy * self.step + self.start_x), 
             (posx * self.step + self.start_x, (posy + 1) * self.step + self.start_y))
         if player == 2:
