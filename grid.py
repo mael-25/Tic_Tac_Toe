@@ -41,15 +41,15 @@ class Grid:
     
         
     def add_pawn(self, player, posx_sq, posy_sq):
-        if self.occupied[pos[0]][pos[1]] == 0:
+        if self.occupied[posx_sq][posy_sq] == 0:
 
             if player == 1:
-                self.occupied[pos[0]][pos[1]] == 1
+                self.occupied[posx_sq][posy_sq] == 1
                 # print(pos)
 
                 return True
             if player == 2:
-                self.occupied[pos[0]][pos[1]] == 2
+                self.occupied[posx_sq][posy_sq] == 2
                 # print(pos)
                 return True
         else: 
@@ -57,10 +57,11 @@ class Grid:
 
     
     def get_pos_in_square(self, posx, posy):
-        new_pos_x = posx - self.start_x // self.step
-        new_pos_y = posy - self.start_y // self.step
+        new_pos_x = (posx - self.start_x) // self.step
+        new_pos_y = (posy - self.start_y) // self.step
         if new_pos_x != 0 and new_pos_y != 0 and new_pos_x < 4 and new_pos_y < 4:
             return new_pos_x, new_pos_y
+        return None
 
     def pos_occupied(self, posx_sq, posy_sq):
         if self.occupied[posx_sq][posy_sq] == 0:
