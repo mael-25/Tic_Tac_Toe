@@ -46,6 +46,8 @@ def main():
                 posx_in_sq, posy_in_sq = grid.get_pos_in_square(posx, posy)
                 if grid.pos_occupied(posx_in_sq, posy_in_sq):
                     grid.add_pawn(1, posx_in_sq, posy_in_sq)
+                    piece.draw(1, posx_in_sq, posy_in_sq)
+                    pygame.display.update()
 
 if __name__ == "__main__":
     main()

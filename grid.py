@@ -59,12 +59,13 @@ class Grid:
     def get_pos_in_square(self, posx, posy):
         new_pos_x = (posx - self.start_x) // self.step
         new_pos_y = (posy - self.start_y) // self.step
-        if new_pos_x != 0 and new_pos_y != 0 and new_pos_x < 4 and new_pos_y < 4:
+        if new_pos_x < 4 or new_pos_y < 4: ##or new_pos_x != 0 or new_pos_y != 0:
             return new_pos_x, new_pos_y
         return None
 
     def pos_occupied(self, posx_sq, posy_sq):
-        if self.occupied[posx_sq][posy_sq] == 0:
-            return True
+        if posx_sq < 3 or posy_sq < 3:
+            if self.occupied[posx_sq][posy_sq] == 0:
+                return True
         else:
             return False
