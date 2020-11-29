@@ -44,12 +44,12 @@ class Grid:
         if self.occupied[posx_sq][posy_sq] == 0:
 
             if player == 1:
-                self.occupied[posx_sq][posy_sq] == 1
+                self.occupied[posx_sq][posy_sq] = 1
                 # print(pos)
 
                 return True
             if player == 2:
-                self.occupied[posx_sq][posy_sq] == 2
+                self.occupied[posx_sq][posy_sq] = 2
                 # print(pos)
                 return True
         else: 
