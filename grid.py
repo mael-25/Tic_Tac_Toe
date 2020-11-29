@@ -64,8 +64,15 @@ class Grid:
         return None
 
     def pos_occupied(self, posx_sq, posy_sq):
-        if posx_sq < 3 or posy_sq < 3:
+        print(posx_sq, posy_sq)
+        if  posx_sq < 3 and \
+            posx_sq >= 0 and \
+            posy_sq < 3 and \
+            posy_sq >= 0:
+
             if self.occupied[posx_sq][posy_sq] == 0:
                 return True
+            else:
+                return False
         else:
             return False
