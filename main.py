@@ -29,7 +29,7 @@ def main():
 
     grid = g.Grid(screen=screen, step=config.step, start_x=config.start_x, start_y=config.start_y)
     piece = p.Piece(screen, 3, 3, config.start_x, config.start_y, config.step)    
-    referee = r.Referee()
+    referee = r.Referee(config.step, config.start_x, config.start_y)
 
     finished = False
     grid.draw_grid()
@@ -47,7 +47,11 @@ def main():
                 if grid.pos_occupied(posx_in_sq, posy_in_sq):
                     grid.add_pawn(1, posx_in_sq, posy_in_sq)
                     piece.draw(1, posx_in_sq, posy_in_sq)
-                    pygame.display.update()
+
+        if player_turn == 2:
+            pass
+                    
+        pygame.display.update()
 
 if __name__ == "__main__":
     main()
