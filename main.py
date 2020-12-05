@@ -1,6 +1,7 @@
 import pygame
 import argparse
 import time
+import sys
 
 import screen as s
 import grid as g
@@ -16,6 +17,8 @@ parser.add_argument('--starting', type=int, default=1, help= "player to start(1 
 config = parser.parse_args()
 
 def main():
+    
+
     x, y = s.calculate_screen_size(step=config.step, start_x=config.start_x, start_y=config.start_y)
     
 
@@ -47,11 +50,20 @@ def main():
                 if grid.pos_occupied(posx_in_sq, posy_in_sq):
                     grid.add_pawn(1, posx_in_sq, posy_in_sq)
                     piece.draw(1, posx_in_sq, posy_in_sq)
+                    player_turn = 2
+        
+        pygame.display.update()
 
         if player_turn == 2:
-            pass
-                    
+            # x, y, o = , None, None
+            x, y, o = referee.choose_pos(grid.occupied)
+            posx_in_sq, posy_in_sq = grid.get_pos_in_square(x, y)
+            player_turn = 1
+            grid.add_pawn(2, posx_in_sq, posy_in_sq)
+            grid.change_occupied(o)
+
         pygame.display.update()
+        
 
 if __name__ == "__main__":
     main()

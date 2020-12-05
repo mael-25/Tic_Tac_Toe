@@ -76,3 +76,6 @@ class Grid:
                 return False
         else:
             return False
+
+    def change_occupied(self, new_occupied):
+        self.occupied = new_occupied
