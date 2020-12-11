@@ -65,7 +65,7 @@ class Grid:
 
     def pos_occupied(self, posx_sq, posy_sq):
         print(posx_sq, posy_sq)
-        if  posx_sq < 3 and \
+        if posx_sq < 3 and \
             posx_sq >= 0 and \
             posy_sq < 3 and \
             posy_sq >= 0:
@@ -76,3 +76,6 @@ class Grid:
                 return False
         else:
             return False
+
+    def change_occupied(self, new_occupied):
+        self.occupied = new_occupied
