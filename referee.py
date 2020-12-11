@@ -23,6 +23,7 @@ class Referee:
                     or occupied[ox] == [2, 0, 2]\
                     or occupied[ox] == [2, 2, 0]:
 
+                    occupied[ox] == [2, 2, 2]
                     if occupied[ox][oy] == 0:
                         return ox, oy, occupied
                 
@@ -30,7 +31,11 @@ class Referee:
                 if occupied[ox] == [0, 1, 1]\
                     or occupied[ox] == [1, 0, 1]\
                     or occupied[ox] == [1, 1, 0]:
-
+                    
+                    # new_occupied = occupied[ox]
+                    for o in range(3):
+                        if occupied[ox][o] == 0:
+                            occupied[ox][o] == 2
                     if occupied[ox][oy] == 0:
                         return ox, oy, occupied
 

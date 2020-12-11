@@ -56,7 +56,7 @@ def main():
 
         if player_turn == 2:
             # x, y, o = , None, None
-            x, y, o = referee.choose_pos(grid.occupied)
+            x, y, o = int(referee.choose_pos(grid.occupied))
             posx_in_sq, posy_in_sq = grid.get_pos_in_square(x, y)
             player_turn = 1
             grid.add_pawn(2, posx_in_sq, posy_in_sq)
