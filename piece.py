@@ -24,6 +24,6 @@ class Piece:
             ((posx + 1) * self.step + self.start_x, posy * self.step + self.start_x), 
             (posx * self.step + self.start_x, (posy + 1) * self.step + self.start_y))
         if player == 2:
-            pygame.draw.circle(self.screen, c_for_p2, (posx * self.step + start_x, posy * self.step + start_y), self.step / 2, width=2)
+            pygame.draw.circle(self.screen, c_for_p2, (posx * self.step + self.start_x, posy * self.step + self.start_y), self.step / 2, width=2)
         else:
             return None

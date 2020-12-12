@@ -29,14 +29,31 @@ class Grid:
                 (self.start_x+self.step*y, self.start_y+self.step*3))
 
     def draw_all_pawns(self):
-        for y in self.occupied:
-            for x in y:
-                if x == 0: ## not occupied
+        # for y in self.occupied:
+        #     for x in y:
+        #         if x == 0: ## not occupied
+        #             pass
+        #         if x == 1: ## occupied by player 1
+        #             pass
+        #         if x == 2: ## occupied by player 2
+        #             pass
+        for y in range(3):
+            for x in range(3):
+                if self.occupied[y][x] == 0:
                     pass
-                if x == 1: ## occupied by player 1
-                    pass
-                if x == 2: ## occupied by player 2
-                    pass
+                if self.occupied[y][x] == 1:
+                    pygame.draw.line(self.screen, 
+                    (255, 255, 255), 
+                    (self.start_x+self.step*x, self.start_y+self.step*y), 
+                    (self.start_x+self.step*(x+1), self.start_y+self.step*(y+1)))
+                    
+                    pygame.draw.line(self.screen, 
+                    (255, 255, 255), 
+                    (self.start_x+self.step*(x+1), self.start_y+self.step*y), 
+                    (self.start_x+self.step*x, self.start_y+self.step*(y+1)))
+
+                if self.occupied[y][x] == 2:
+                    pygame.draw.circle(self.screen, (100, 255, 0), (self.step*x+self.step/2+self.start_x, self.step*y+self.step/2+self.start_y), self.step/2, width=3)
 
     
         
