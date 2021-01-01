@@ -28,7 +28,7 @@ class Grid:
                 (self.start_x+self.step*y, self.start_y), 
                 (self.start_x+self.step*y, self.start_y+self.step*3))
 
-    def draw_all_pawns(self):
+    def draw_all_pawns(self, c1=(25, 255, 0), c2=(12, 100, 255)):
         # for y in self.occupied:
         #     for x in y:
         #         if x == 0: ## not occupied
@@ -43,30 +43,33 @@ class Grid:
                     pass
                 if self.occupied[y][x] == 1:
                     pygame.draw.line(self.screen, 
-                    (255, 255, 255), 
+                    c1, 
                     (self.start_x+self.step*x, self.start_y+self.step*y), 
                     (self.start_x+self.step*(x+1), self.start_y+self.step*(y+1)))
                     
                     pygame.draw.line(self.screen, 
-                    (255, 255, 255), 
+                    c1, 
                     (self.start_x+self.step*(x+1), self.start_y+self.step*y), 
                     (self.start_x+self.step*x, self.start_y+self.step*(y+1)))
 
                 if self.occupied[y][x] == 2:
-                    pygame.draw.circle(self.screen, (100, 255, 0), (self.step*x+self.step/2+self.start_x, self.step*y+self.step/2+self.start_y), self.step/2, width=3)
+                    pygame.draw.circle(self.screen, 
+                    c1, 
+                    (self.step*x+self.step/2+self.start_x, self.step*y+self.step/2+self.start_y), 
+                    self.step/2, width=3)
 
     
         
     def add_pawn(self, player, posx_sq, posy_sq):
-        if self.occupied[posx_sq][posy_sq] == 0:
+        if self.occupied[posy_sq][posx_sq] == 0:
 
             if player == 1:
-                self.occupied[posx_sq][posy_sq] = 1
+                self.occupied[posy_sq][posx_sq] = 1
                 # print(pos)
 
                 return True
             if player == 2:
-                self.occupied[posx_sq][posy_sq] = 2
+                self.occupied[posy_sq][posx_sq] = 2
                 # print(pos)
                 return True
         else: 
@@ -87,7 +90,7 @@ class Grid:
             posy_sq < 3 and \
             posy_sq >= 0:
 
-            if self.occupied[posx_sq][posy_sq] == 0:
+            if self.occupied[posy_sq][posx_sq] == 0:
                 return True
             else:
                 return False
