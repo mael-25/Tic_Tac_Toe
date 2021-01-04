@@ -30,39 +30,49 @@ def main():
     pygame.Surface.fill(screen, color_screen) # fills the screen in color screen (virable)
 
 
-    grid = g.Grid(screen=screen, step=config.step, start_x=config.start_x, start_y=config.start_y)
-    piece = p.Piece(screen, 3, 3, config.start_x, config.start_y, config.step)    
-    referee = r.Referee(config.step, config.start_x, config.start_y)
+    grid_ = g.Grid(screen=screen, step=config.step, start_x=config.start_x, start_y=config.start_y)
+    # piece = p.Piece(screen, 3, 3, config.start_x, config.start_y, config.step)    
+    # referee = r.Referee(config.step, config.start_x, config.start_y)
 
     finished = False
-    grid.draw_grid()
+    grid_.draw_grid()
 
     player_turn = config.starting
     pygame.display.update()
+
+
+    def change_player(current_player):
+        return 3 - current_player
 
     while not finished:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 finished = True  ## Finish the game
-            if event.type == pygame.MOUSEBUTTONUP and player_turn == 1:
+            if event.type == pygame.MOUSEBUTTONUP:# and player_turn == 1:
                 posx, posy = pygame.mouse.get_pos()
-                posx_in_sq, posy_in_sq = grid.get_pos_in_square(posx, posy)
-                if grid.pos_occupied(posx_in_sq, posy_in_sq):
-                    grid.add_pawn(1, posx_in_sq, posy_in_sq)
-                    piece.draw(1, posx_in_sq, posy_in_sq)
-                    player_turn = 2
+                posx_in_sq, posy_in_sq = grid_.get_pos_in_square(posx, posy)
+                if grid_.pos_not_occupied(posx_in_sq, posy_in_sq):
+                    grid_.add_pawn(player_turn, posx_in_sq, posy_in_sq)
+                    #piece.draw(player_turn, posx_in_sq, posy_in_sq)
+                    ## Change the player
+                    player_turn = change_player(player_turn)
         
-        pygame.display.update()
+        # ...
 
-        if player_turn == 2:
-            # x, y, o = , None, None
-            x, y, o = int(referee.choose_pos(grid.occupied))
-            posx_in_sq, posy_in_sq = grid.get_pos_in_square(x, y)
-            player_turn = 1
-            grid.add_pawn(2, posx_in_sq, posy_in_sq)
-            grid.change_occupied(o)
-
+        print(grid_.occupied)
+        
+        grid_.draw()
         pygame.display.update()
+        # if player_turn == 2:
+        #     # x, y, o = , None, None
+        #     x, y, grid_.occupied = referee.choose_pos(grid_.occupied)
+        #     #x, y, o = int(referee.choose_pos(grid_.occupied))
+        #     posx_in_sq, posy_in_sq = grid_.get_pos_in_square(x, y)
+        #     player_turn = 1
+        #     grid_.add_pawn(2, posx_in_sq, posy_in_sq)
+        #     grid_.change_occupied(grid_.occupied)
+
+        # pygame.display.update()
         
 
 if __name__ == "__main__":

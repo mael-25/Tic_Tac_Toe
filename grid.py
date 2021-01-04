@@ -1,7 +1,7 @@
 import pygame
 
 
-class Grid:
+class Grid():
     def __init__(self, screen, start_x=25, start_y=25, step=50, grid_size_x=3, grid_size_y=3):
         self.screen = screen
         self.start_x = start_x
@@ -12,6 +12,34 @@ class Grid:
             [0, 0, 0],
             [0, 0, 0]
         ]
+
+
+    def draw(self):
+        self.draw_grid()
+        self.draw_all_pawns()
+
+
+    def draw_pawn(self, player, posx, posy, c_for_p1=(255, 25, 255), c_for_p2=(123, 231, 213)):
+        if player == 1:
+            pygame.draw.line(self.screen, 
+            c_for_p1,
+            (posx * self.step + self.start_x, posy * self.step + self.start_x), 
+            ((posx + 1) * self.step + self.start_x, (posy + 1) * self.step + self.start_y))
+
+            pygame.draw.line(self.screen, 
+            c_for_p1, 
+            ((posx + 1) * self.step + self.start_x, posy * self.step + self.start_x), 
+            (posx * self.step + self.start_x, (posy + 1) * self.step + self.start_y))
+        if player == 2:
+            pygame.draw.circle(self.screen, 
+            c_for_p2, 
+            (posx * self.step + self.start_x + self.step/2, posy * self.step + self.start_y + self.step/2), 
+            self.step / 2, 
+            width=2)
+        else:
+            return None
+
+    
 
     def draw_grid(self):
         for x in range(1, 3):             
@@ -28,32 +56,18 @@ class Grid:
                 (self.start_x+self.step*y, self.start_y), 
                 (self.start_x+self.step*y, self.start_y+self.step*3))
 
-    def draw_all_pawns(self):
-        for y in self.occupied:
-            for x in y:
-                if x == 0: ## not occupied
-                    pass
-                if x == 1: ## occupied by player 1
-                    pass
-                if x == 2: ## occupied by player 2
-                    pass
-
-    
+    def draw_all_pawns(self):      
+        for y in range(3):
+            for x in range(3):
+                if self.occupied[y][x] > 0: 
+                    self.draw_pawn(self.occupied[y][x], x, y)     
         
-    def add_pawn(self, player, posx_sq, posy_sq):
-        if self.occupied[posx_sq][posy_sq] == 0:
-
-            if player == 1:
-                self.occupied[posx_sq][posy_sq] = 1
-                # print(pos)
-
-                return True
-            if player == 2:
-                self.occupied[posx_sq][posy_sq] = 2
-                # print(pos)
-                return True
+    def add_pawn(self, player_id, posx_sq, posy_sq):
+        if self.occupied[posy_sq][posx_sq] == 0:
+            self.occupied[posy_sq][posx_sq] = player_id
+            return True
         else: 
-            return False
+            assert False
 
     
     def get_pos_in_square(self, posx, posy):
@@ -63,14 +77,14 @@ class Grid:
             return new_pos_x, new_pos_y
         return None
 
-    def pos_occupied(self, posx_sq, posy_sq):
+    def pos_not_occupied(self, posx_sq, posy_sq):
         print(posx_sq, posy_sq)
         if posx_sq < 3 and \
             posx_sq >= 0 and \
             posy_sq < 3 and \
             posy_sq >= 0:
 
-            if self.occupied[posx_sq][posy_sq] == 0:
+            if self.occupied[posy_sq][posx_sq] == 0:
                 return True
             else:
                 return False
