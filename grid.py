@@ -13,6 +13,25 @@ class Grid:
             [0, 0, 0]
         ]
 
+    def draw(self, player, posx, posy, c_for_p1=(255, 25, 255), c_for_p2=(123, 231, 213)):
+        if player == 1:
+            pygame.draw.line(self.screen, 
+            c_for_p1,
+            (posx * self.step + self.start_x, posy * self.step + self.start_x), 
+            ((posx + 1) * self.step + self.start_x, (posy + 1) * self.step + self.start_y))
+
+            pygame.draw.line(self.screen, 
+            c_for_p1, 
+            ((posx + 1) * self.step + self.start_x, posy * self.step + self.start_x), 
+            (posx * self.step + self.start_x, (posy + 1) * self.step + self.start_y))
+        if player == 2:
+            pygame.draw.circle(self.screen, 
+            c_for_p2, 
+            (posx * self.step + self.step/2 + self.start_x, posy * self.step + self.step/2 + self.start_y), 
+            self.step / 2, 
+            width=2)
+        else:
+            return None
     def draw_grid(self):
         for x in range(1, 3):             
             pygame.draw.line(
@@ -37,26 +56,10 @@ class Grid:
         #             pass
         #         if x == 2: ## occupied by player 2
         #             pass
+        self.draw_grid()
         for y in range(3):
             for x in range(3):
-                if self.occupied[y][x] == 0:
-                    pass
-                if self.occupied[y][x] == 1:
-                    pygame.draw.line(self.screen, 
-                    c1, 
-                    (self.start_x+self.step*x, self.start_y+self.step*y), 
-                    (self.start_x+self.step*(x+1), self.start_y+self.step*(y+1)))
-                    
-                    pygame.draw.line(self.screen, 
-                    c1, 
-                    (self.start_x+self.step*(x+1), self.start_y+self.step*y), 
-                    (self.start_x+self.step*x, self.start_y+self.step*(y+1)))
-
-                if self.occupied[y][x] == 2:
-                    pygame.draw.circle(self.screen, 
-                    c1, 
-                    (self.step*x+self.step/2+self.start_x, self.step*y+self.step/2+self.start_y), 
-                    self.step/2, width=3)
+                self.draw(self.occupied[y][x], x, y)
 
     
         

@@ -46,7 +46,7 @@ class Referee:
                 if occupied[y][x] == 0:
                     return None
 
-        return 0
+        return "Finish"
 
     def won(self, occupied):
         a = self.line_check(occupied)
@@ -60,6 +60,7 @@ class Referee:
             return b
         if c != 0:
             return c
-        if d == 0:
-            return 0
+        if d == "Finish":
+            return "Finish"
+        return None
         

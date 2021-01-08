@@ -18,7 +18,10 @@ config = parser.parse_args()
 
 def main():
     
-
+    p1_name = input('''player one name
+''')
+    p2_name = input('''player two name
+''')
     x, y = s.calculate_screen_size(step=config.step, start_x=config.start_x, start_y=config.start_y)
     
 
@@ -26,7 +29,7 @@ def main():
     pygame.display.set_caption("Tic Tac Toe")  # tell pygame to name the screen Tic tac toe
     screen = pygame.display.set_mode((x, y))  # size of the game
 
-    color_screen = (0, 255, 255)  
+    color_screen = (255, 255, 255)  
     pygame.Surface.fill(screen, color_screen) # fills the screen in color screen (virable)
 
 
@@ -47,17 +50,28 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 finished = True  ## Finish the game
-            if event.type == pygame.MOUSEBUTTONUP and player_turn == 1:
+            if event.type == pygame.MOUSEBUTTONUP:# and player_turn == 1:
                 posx, posy = pygame.mouse.get_pos()
                 posx_in_sq, posy_in_sq = grid.get_pos_in_square(posx, posy)
                 if grid.pos_occupied(posx_in_sq, posy_in_sq):
-                    grid.add_pawn(1, posx_in_sq, posy_in_sq)
+                    grid.add_pawn(player_turn, posx_in_sq, posy_in_sq)
                     # piece.draw(1, posx_in_sq, posy_in_sq)
-                    # player_turn = 2
+                    player_turn = 3 - player_turn
         
         grid.draw_all_pawns()
         pygame.display.update()
-
+        c = referee.won(grid.occupied)
+        if c == "Finish":
+            finished = True
+        elif c == None:
+            pass
+        else:
+            if c == 1:
+                pw = p1_name
+            elif c == 2:
+                pw = p2_name
+            print("{} won".format(pw))
+            finished = True
         # print(grid.occupied)
         # if player_turn == 2:
         #     posx_in_sq, posy_in_sq = grid_.get_pos_in_square(x, y)
