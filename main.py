@@ -31,7 +31,7 @@ def main():
 
 
     grid = g.Grid(screen=screen, step=config.step, start_x=config.start_x, start_y=config.start_y)
-    piece = p.Piece(screen, 3, 3, config.start_x, config.start_y, config.step)    
+    # piece = p.Piece(screen, 3, 3, config.start_x, config.start_y, config.step)    
     referee = r.Referee(config.step, config.start_x, config.start_y)
 
     finished = False
