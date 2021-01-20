@@ -12,15 +12,18 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--step', type=int, default=50)
 parser.add_argument('--start_x', type=int, default=25, help="pixel to start x")
 parser.add_argument('--start_y', type=int, default=25, help="pixel to start y")
-parser.add_argument('--starting', type=int, default=1, help= "player to start(1 for player, 2 for computer)")
+parser.add_argument('--starting', type=int, default=1, help="player to start")
+parser.add_argument('--name_p1', type=str, default="ask", help="player one name")   
+parser.add_argument('--name_p2', type=str, default="ask", help="player two name")   
 
 config = parser.parse_args()
 
 def main():
-    
-    p1_name = input('''player one name
+    if config.name_p1.lower() == "ask":  
+        p1_name = input('''player one name
 ''')
-    p2_name = input('''player two name
+    if config.name_p2.lower() == "ask":  
+        p2_name = input('''player two name
 ''')
     x, y = s.calculate_screen_size(step=config.step, start_x=config.start_x, start_y=config.start_y)
     
@@ -34,7 +37,6 @@ def main():
 
 
     grid = g.Grid(screen=screen, step=config.step, start_x=config.start_x, start_y=config.start_y)
-    # piece = p.Piece(screen, 3, 3, config.start_x, config.start_y, config.step)    
     referee = r.Referee(config.step, config.start_x, config.start_y)
 
     finished = False
@@ -55,7 +57,6 @@ def main():
                 posx_in_sq, posy_in_sq = grid.get_pos_in_square(posx, posy)
                 if grid.pos_occupied(posx_in_sq, posy_in_sq):
                     grid.add_pawn(player_turn, posx_in_sq, posy_in_sq)
-                    # piece.draw(1, posx_in_sq, posy_in_sq)
                     player_turn = 3 - player_turn
         
         grid.draw_all_pawns()
@@ -63,6 +64,7 @@ def main():
         c = referee.won(grid.occupied)
         if c == "Finish":
             finished = True
+            print("finished")
         elif c == None:
             pass
         else:
@@ -72,13 +74,6 @@ def main():
                 pw = p2_name
             print("{} won".format(pw))
             finished = True
-        # print(grid.occupied)
-        # if player_turn == 2:
-        #     posx_in_sq, posy_in_sq = grid_.get_pos_in_square(x, y)
-        #     player_turn = 1
-        #     grid_.add_pawn(2, posx_in_sq, posy_in_sq)
-        #     grid_.change_occupied(grid_.occupied)
-
         grid.draw_all_pawns()
         pygame.display.update()
         
