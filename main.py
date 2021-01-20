@@ -25,6 +25,9 @@ def main():
     if config.name_p2.lower() == "ask":  
         p2_name = input('''player two name
 ''')
+    else:
+        p1_name = config.name_p1
+        p2_name = config.name_p2
     x, y = s.calculate_screen_size(step=config.step, start_x=config.start_x, start_y=config.start_y)
     
 
@@ -65,7 +68,7 @@ def main():
         if c == "Finish":
             finished = True
             print("finished")
-        elif c == None:
+        if c == None:
             pass
         else:
             if c == 1:

@@ -13,6 +13,8 @@ class Referee:
             if occupied[y] == [2, 2, 2]:
                 # print(2)
                 return 2
+
+        return None
                 
 
     def column_check(self, occupied):
@@ -20,24 +22,28 @@ class Referee:
             column_occupied = []
             for x in range(len(occupied[y])):
                 # print(occupied)
-                column_occupied.append(occupied[x][y])
+                column_occupied.append(occupied[y][x])
             if column_occupied == [1, 1, 1]:
-                print(1)
+                # print(1)
                 return 1
             if column_occupied == [2, 2, 2]:
-                print(2)
+                # print(2)
                 return 2
+
+        return None
 
     def diagonal_check(self, occupied): #works
         diagonal_occupied = []
         for yx in range(len(occupied)):
             diagonal_occupied.append(occupied[yx][yx])
         if diagonal_occupied == [1, 1, 1]:
-            # print(1)
+            
             return 1 
         if diagonal_occupied == [2, 2, 2]:
             # print(2)
             return 2 
+
+        
 
 
         diagonal_occupied = []
@@ -51,9 +57,11 @@ class Referee:
         if diagonal_occupied == [2, 2, 2]:
             # print(2)
             return 2
+
+        return None
             
 
-    def check_draw(self, occupied):
+    def check_full(self, occupied):
         # value = True
         for y in range(len(occupied)):
             for x in range(len(occupied)):
@@ -63,18 +71,17 @@ class Referee:
         return "Finish"
 
     def won(self, occupied):
-        a = self.line_check(occupied)
-        b = self.column_check(occupied)
-        c = self.diagonal_check(occupied)
-        d = self.check_draw(occupied)
-        if d == "Finish":
+        line = self.line_check(occupied)
+        column = self.column_check(occupied)
+        diagonal = self.diagonal_check(occupied)
+        draw = self.check_full(occupied)
+        if line != None:
+            return line
+        if column != None:
+            return column
+        if diagonal != None:
+            return diagonal
+        if draw == "Finish":
             return "Finish"
-        if a != 0:
-            return a
-        if b != 0:
-            return b
-        if c != 0:
-            return c
-        
         return None
         
