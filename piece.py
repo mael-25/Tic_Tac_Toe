@@ -12,21 +12,22 @@ class Piece:
         self.start_y = start_y
         self.step = step
 
-    def draw(self, player, posx, posy):
+    def draw(self, player, posx, posy, c_for_p1=(255, 25, 255), c_for_p2=(123, 231, 213)):
         if player == 1:
-            r1 = random.randint(0, 255)
-            r2 = random.randint(0, 255)
-            r3 = random.randint(0, 255)
             pygame.draw.line(self.screen, 
-            (r1, r2, r3), 
+            c_for_p1,
             (posx * self.step + self.start_x, posy * self.step + self.start_x), 
             ((posx + 1) * self.step + self.start_x, (posy + 1) * self.step + self.start_y))
 
             pygame.draw.line(self.screen, 
-            (r2, r3, r1), 
+            c_for_p1, 
             ((posx + 1) * self.step + self.start_x, posy * self.step + self.start_x), 
             (posx * self.step + self.start_x, (posy + 1) * self.step + self.start_y))
         if player == 2:
-            pass
+            pygame.draw.circle(self.screen, 
+            c_for_p2, 
+            (posx * self.step + self.step/2 + self.start_x, posy * self.step + self.step/2 + self.start_y), 
+            self.step / 2, 
+            width=2)
         else:
             return None
