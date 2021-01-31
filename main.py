@@ -51,22 +51,22 @@ def main():
         
         grid.draw_all_pawns()
         pygame.display.update()
-        won(p1_name, p2_name, grid, referee)
+        finished = won(p1_name, p2_name, grid, referee)
 
 def won(p1_name, p2_name, grid, referee):
     c = referee.won(grid.occupied)
     if c == "Finish":
-        finished = True
-        print("finished")
-    if c == None:
-        pass
+        print("Nobody won, it is a draw")
+        return True
+    elif c == None:
+        return False
     else:
         if c == 1:
             pw = p1_name
         elif c == 2:
             pw = p2_name
         print("{} won".format(pw))
-        finished = True
+        return True
 
 def init_screen():
     x, y = s.calculate_screen_size(step=config.step, start_x=config.start_x, start_y=config.start_y)

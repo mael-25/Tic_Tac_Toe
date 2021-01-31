@@ -22,7 +22,7 @@ class Referee:
             column_occupied = []
             for x in range(len(occupied[y])):
                 # print(occupied)
-                column_occupied.append(occupied[y][x])
+                column_occupied.append(occupied[x][y])
             if column_occupied == [1, 1, 1]:
                 # print(1)
                 return 1
