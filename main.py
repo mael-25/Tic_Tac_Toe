@@ -82,12 +82,12 @@ def ask_name():
         p1_name = input('''player one name
 ''')
         if p1_name == "":
-            raise TypeError("Virable for the name ofplayer one must be completed")
+            raise TypeError("variable for the name ofplayer one must be completed")
     if config.name_p2.lower() == "ask":  
         p2_name = input('''player two name
 ''')
         if p2_name == "":
-            raise TypeError("Virable for the name of player two must be completed")
+            raise TypeError("variable for the name of player two must be completed")
     else:
         p1_name = config.name_p1
         p2_name = config.name_p2
